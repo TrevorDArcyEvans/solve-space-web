@@ -15,12 +15,15 @@ function isModal() {
 function hasClass(element, className) {
     return element.classList.contains(className);
 }
+
 function addClass(element, className) {
     element.classList.add(className);
 }
+
 function removeClass(element, className) {
     element.classList.remove(className);
 }
+
 function removeClassFromAllChildren(element, className) {
     element.querySelectorAll('.' + className).forEach(function(element) {
         removeClass(element, className);
@@ -135,12 +138,15 @@ window.addEventListener('keydown', function(event) {
 function isMenubar(element) {
     return hasClass(element, 'menubar');
 }
+
 function isMenu(element) {
     return hasClass(element, 'menu');
 }
+
 function isPopupMenu(element) {
     return isMenu(element) && hasClass(element, 'popup')
 }
+
 function hasSubmenu(menuItem) {
     return !!menuItem.querySelector('.menu');
 }
@@ -149,15 +155,18 @@ function hasSubmenu(menuItem) {
 function isMenuItemSelectable(menuItem) {
     return !(hasClass(menuItem, 'disabled') || hasClass(menuItem, 'separator'));
 }
+
 function isMenuItemSelected(menuItem) {
     return hasClass(menuItem, 'selected') || hasClass(menuItem, 'hover');
 }
+
 function deselectMenuItem(menuItem) {
     removeClass(menuItem, 'selected');
     removeClass(menuItem, 'hover');
     removeClassFromAllChildren(menuItem, 'selected');
     removeClassFromAllChildren(menuItem, 'hover');
 }
+
 function selectMenuItem(menuItem) {
     var menu = menuItem.parentElement;
     removeClassFromAllChildren(menu, 'selected');
@@ -168,6 +177,7 @@ function selectMenuItem(menuItem) {
         addClass(menuItem, 'hover');
     }
 }
+
 function triggerMenuItem(menuItem) {
     selectMenuItem(menuItem);
     if(hasSubmenu(menuItem)) {
@@ -199,6 +209,7 @@ function getMenuItem(element) {
         return element;
     }
 }
+
 function getMenu(element) {
     if(!element) return;
     if(isMenu(element)) {
@@ -239,6 +250,7 @@ window.addEventListener('click', function(event) {
         });
     }
 });
+
 window.addEventListener('mouseover', function(event) {
     var menuItem = getMenuItem(event.target);
     var menu = getMenu(menuItem);
@@ -260,6 +272,7 @@ window.addEventListener('mouseover', function(event) {
         }
     }
 });
+
 window.addEventListener('keydown', function(event) {
     var allSelected = document.querySelectorAll('.menubar .selected, .menubar .hover,' +
                                                 '.menu.popup .selected, .menu.popup .hover');
@@ -341,6 +354,7 @@ window.addEventListener('keydown', function(event) {
         removeClass(document.body, 'mnemonic');
     }
 });
+
 window.addEventListener('keyup', function(event) {
     if(event.key == 'Alt') {
        removeClass(document.body, 'mnemonic');
